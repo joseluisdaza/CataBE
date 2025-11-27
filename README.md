@@ -39,6 +39,10 @@ Proyecto backend de una app web para gestionar propiedades inmobiliarias.
 	npm start
 	```
 
+## Pruebas manuales con Postman
+
+En `postman/CATABE API.postman_collection.json` se encuentra una colección que puede ser importada en Postman. Esta colección contiene requests listos para probar los endpoints principales del proyecto.
+
 ## Estructura y Arquitectura del Proyecto
 
 El proyecto sigue **Arquitectura Hexagonal (Ports & Adapters)**, separando la lógica de dominio de la infraestructura y la aplicación. Las principales capas y conceptos son:

@@ -1,0 +1,448 @@
+{
+	"info": {
+		"_postman_id": "c5768f3a-a8df-4938-961b-2a1d9feda554",
+		"name": "CATABE API",
+		"description": "Collection for testing CATABE endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5845337",
+		"_collection_link": "https://martian-meteor-827918.postman.co/workspace/Clase-FullStack-Mitocode-NET~c20de813-d87e-45ac-8e1c-cfeced796861/collection/5845337-c5768f3a-a8df-4938-961b-2a1d9feda554?action=share&source=collection_link&creator=5845337"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create User - Admin",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Jorge Chavez\",\n  \"username\": \"jorgechavez\",\n  \"email\": \"jorge@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/D6F67B26-127C-4D5C-8904-7B92CB3E5553",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"D6F67B26-127C-4D5C-8904-7B92CB3E5553"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User - Viewer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Maria Garcia\",\n  \"username\": \"mariagarcia\",\n  \"email\": \"maria@example.com\",\n  \"password\": \"password456\",\n  \"role\": \"viewer\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/B999D862-F3CF-46EE-8AE9-80096A81E506",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"B999D862-F3CF-46EE-8AE9-80096A81E506"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/users/D6F67B26-127C-4D5C-8904-7B92CB3E5553",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"D6F67B26-127C-4D5C-8904-7B92CB3E5553"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authenticate User - Valid Credentials",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"const res = pm.response.json();",
+									"if (res && res.token) { pm.collectionVariables.set('token', res.token); }"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"jorge@example.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/auth",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Error Cases",
+			"item": [
+				{
+					"name": "Create User - Duplicate Email",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Duplicate User\",\n  \"username\": \"duplicate\",\n  \"email\": \"jorge@example.com\",\n  \"password\": \"password789\",\n  \"role\": \"viewer\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/0DF7F092-4643-4830-BB5C-7992DF00763B",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"0DF7F092-4643-4830-BB5C-7992DF00763B"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User - Duplicate Username",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Another User\",\n  \"username\": \"jorgechavez\",\n  \"email\": \"another@example.com\",\n  \"password\": \"password789\",\n  \"role\": \"viewer\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/6C18ADC5-AFF8-482D-889C-ABB0F871D604",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"6C18ADC5-AFF8-482D-889C-ABB0F871D604"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User - Not Found",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/users/AE81023B-568C-4468-98C0-707F1D20FB7B",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"AE81023B-568C-4468-98C0-707F1D20FB7B"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authenticate - Invalid Email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"nonexistent@example.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/auth",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authenticate - Invalid Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"jorge@example.com\",\n  \"password\": \"wrongpassword\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/auth",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Validation Cases",
+			"item": [
+				{
+					"name": "Create User - Missing Required Fields",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Incomplete User\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/6C18ADC5-AFF8-482D-889C-ABB0F871D604",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"6C18ADC5-AFF8-482D-889C-ABB0F871D604"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User - Invalid Email Format",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Invalid Email User\",\n  \"username\": \"invalidemail\",\n  \"email\": \"not-an-email\",\n  \"password\": \"password123\",\n  \"role\": \"viewer\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/D6F67B26-127C-4D5C-8904-7B92CB3E5553",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"D6F67B26-127C-4D5C-8904-7B92CB3E5553"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User - Password Too Short",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Short Password User\",\n  \"username\": \"shortpass\",\n  \"email\": \"short@example.com\",\n  \"password\": \"123\",\n  \"role\": \"viewer\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/B999D862-F3CF-46EE-8AE9-80096A81E506",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"B999D862-F3CF-46EE-8AE9-80096A81E506"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User - Invalid Role",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Invalid Role User\",\n  \"username\": \"invalidrole\",\n  \"email\": \"invalidrole@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"superadmin\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/0DF7F092-4643-4830-BB5C-7992DF00763B",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"0DF7F092-4643-4830-BB5C-7992DF00763B"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authenticate - Missing Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"jorge@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/auth",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health Check",
+			"item": [
+				{
+					"name": "Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/status",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
