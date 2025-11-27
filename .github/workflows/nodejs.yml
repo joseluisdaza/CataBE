@@ -1,0 +1,49 @@
+name: Node CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22.x, 24.x]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Create .env file from .env.test
+        run: |
+          cp .env.test .env
+      - name: Start services with docker compose
+        run: |
+          docker compose up -d
+      - name: Wait for PostgreSQL to be ready
+        run: |
+          echo "Waiting for PostgreSQL test database..."
+          timeout=60
+          elapsed=0
+          while ! docker compose exec -T postgres-db-test pg_isready -U postgres > /dev/null 2>&1; do
+            if [ $elapsed -ge $timeout ]; then
+              echo "Timeout waiting for PostgreSQL after ${timeout}s"
+              docker compose logs postgres-db-test
+              exit 1
+            fi
+            echo "Waiting... (${elapsed}s/${timeout}s)"
+            sleep 2
+            elapsed=$((elapsed + 2))
+          done
+          echo "PostgreSQL test database is ready!"
+          docker ps
+      - name: npm install
+        run: |
+          npm install
+      - name: npm run build && npm run build:di
+        run: |
+          npm run build && npm run build:di
+      - name: npm test
+        run: |
+          npm test

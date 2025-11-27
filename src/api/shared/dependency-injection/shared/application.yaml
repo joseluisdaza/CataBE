@@ -1,0 +1,12 @@
+services:
+
+  Shared.PostgresConfig:
+    factory:
+      class: ../../../../modules/shared/infrastructure/persistence/postgre/typeOrmConfigFactory
+      method: 'createConfig'
+
+  Shared.ConnectionManager:
+    factory:
+      class: ../../../../modules/shared/infrastructure/persistence/typeorm/typeOrmClientFactory
+      method: 'createClient'
+    arguments: ['cochaprecios', '@Shared.PostgresConfig']

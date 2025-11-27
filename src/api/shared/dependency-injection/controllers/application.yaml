@@ -1,0 +1,17 @@
+services:
+
+  Controllers.status.StatusGetController:
+    class: ../../../status/statusGetController
+    arguments: []
+
+  Controllers.users.UserPutController:
+    class: ../../../users/userPutController
+    arguments: ['@Users.application.UserRegistrar']
+
+  Controllers.users.UserGetController:
+    class: ../../../users/userGetController
+    arguments: ['@Users.application.UserFinder']
+
+  Controllers.users.UserPostAuthController:
+    class: ../../../users/userPostAuthController
+    arguments: ['@Users.application.UserAuthenticator', '@Users.domain.UserTokenSigner']

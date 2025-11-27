@@ -1,0 +1,23 @@
+services:
+
+  Users.domain.UserRepository:
+    class: ../../../../modules/users/infrastructure/persistence/typeOrmUserRepository
+    arguments: ['@Shared.ConnectionManager']
+
+  Users.domain.UserPasswordHasher:
+    class: ../../../../modules/users/infrastructure/bcryptPasswordHasher
+
+  Users.domain.UserTokenSigner:
+    class: ../../../../modules/users/infrastructure/jwtTokenSigner
+
+  Users.application.UserRegistrar:
+    class: ../../../../modules/users/application/userRegistrar
+    arguments: ['@Users.domain.UserRepository', '@Users.domain.UserPasswordHasher']
+
+  Users.application.UserFinder:
+    class: ../../../../modules/users/application/userFinder
+    arguments: ['@Users.domain.UserRepository']
+
+  Users.application.UserAuthenticator:
+    class: ../../../../modules/users/application/userAuthenticator
+    arguments: ['@Users.domain.UserRepository', '@Users.domain.UserPasswordHasher']
