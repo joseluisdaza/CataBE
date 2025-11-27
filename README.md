@@ -1,3 +1,5 @@
+![Node CI](https://github.com/joseluisdaza/CataBE/actions/workflows/nodejs.yml/badge.svg?branch=main)
+
 # CataBE
 
 Proyecto backend de una app web para gestionar propiedades inmobiliarias.
