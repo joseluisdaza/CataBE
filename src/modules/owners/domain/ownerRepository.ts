@@ -8,4 +8,5 @@ export interface OwnerRepository {
   findById(id: OwnerId): Promise<Nullable<Owner>>;
   findByCiNit(ciNit: OwnerCiNit): Promise<Nullable<Owner>>;
   findAll(): Promise<Owner[]>;
+  delete(id: OwnerId): Promise<void>;
 }

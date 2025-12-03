@@ -83,4 +83,16 @@ describe('TypeOrmOwnerRepository', () => {
       expect(owners.length).toBeGreaterThanOrEqual(2);
     });
   });
+
+  describe('#delete', () => {
+    it('should delete an owner', async () => {
+      const owner = OwnerMother.random();
+      await repository.save(owner);
+
+      await repository.delete(owner.id);
+
+      const found = await repository.findById(owner.id);
+      expect(found).toBeNull();
+    });
+  });
 });

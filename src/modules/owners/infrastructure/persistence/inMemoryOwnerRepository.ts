@@ -25,4 +25,8 @@ export default class InMemoryOwnerRepository implements OwnerRepository {
   async findAll(): Promise<Owner[]> {
     return Array.from(this.owners.values());
   }
+
+  async delete(id: OwnerId): Promise<void> {
+    this.owners.delete(id.value);
+  }
 }

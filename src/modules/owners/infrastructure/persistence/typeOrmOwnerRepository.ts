@@ -30,6 +30,11 @@ export default class TypeOrmOwnerRepository extends TypeOrmRepository<Owner> imp
     return owners;
   }
 
+  public async delete(id: OwnerId): Promise<void> {
+    const repository = await this.repository();
+    await repository.delete({ id });
+  }
+
   protected entitySchema(): EntitySchema<Owner> {
     return OwnerEntity;
   }

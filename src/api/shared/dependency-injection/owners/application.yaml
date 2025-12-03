@@ -15,3 +15,11 @@ services:
   Owners.application.OwnersFinder:
     class: ../../../../modules/owners/application/ownersFinder
     arguments: ['@Owners.domain.OwnerRepository']
+
+  Owners.application.OwnerUpdater:
+    class: ../../../../modules/owners/application/ownerUpdater
+    arguments: ['@Owners.domain.OwnerRepository']
+
+  Owners.application.OwnerDeleter:
+    class: ../../../../modules/owners/application/ownerDeleter
+    arguments: ['@Owners.domain.OwnerRepository']

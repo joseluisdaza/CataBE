@@ -9,6 +9,7 @@ export class OwnerRepositoryMock implements OwnerRepository {
   private readonly mockFindById = jest.fn();
   private readonly mockFindByCiNit = jest.fn();
   private readonly mockFindAll = jest.fn();
+  private readonly mockDelete = jest.fn();
 
   async save(owner: Owner): Promise<void> {
     await this.mockSave(owner);
@@ -24,6 +25,10 @@ export class OwnerRepositoryMock implements OwnerRepository {
 
   async findAll(): Promise<Owner[]> {
     return await this.mockFindAll();
+  }
+
+  async delete(id: OwnerId): Promise<void> {
+    await this.mockDelete(id);
   }
 
   assertLastSavedOwnerIs(expected: Owner): void {
@@ -43,5 +48,11 @@ export class OwnerRepositoryMock implements OwnerRepository {
 
   whenFindAllReturn(owners: Owner[]): void {
     this.mockFindAll.mockReturnValue(owners);
+  }
+
+  assertDeleteCalledWith(id: OwnerId): void {
+    const calls = this.mockDelete.mock.calls;
+    const last = calls[calls.length - 1]?.[0];
+    expect(last).toEqual(id);
   }
 }

@@ -18,7 +18,7 @@ services:
 
   Controllers.owners.OwnerPutController:
     class: ../../../owners/ownerPutController
-    arguments: ['@Owners.application.OwnerRegistrar']
+    arguments: ['@Owners.application.OwnerUpdater']
 
   Controllers.owners.OwnerGetController:
     class: ../../../owners/ownerGetController
@@ -27,3 +27,7 @@ services:
   Controllers.owners.OwnerGetAllController:
     class: ../../../owners/ownerGetAllController
     arguments: ['@Owners.application.OwnersFinder']
+
+  Controllers.owners.OwnerDeleteController:
+    class: ../../../owners/ownerDeleteController
+    arguments: ['@Owners.application.OwnerDeleter']

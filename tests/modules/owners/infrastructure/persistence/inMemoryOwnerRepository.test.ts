@@ -59,4 +59,15 @@ describe('InMemoryOwnerRepository', () => {
     const owners = await repository.findAll();
     expect(owners.length).toBe(2);
   });
+
+  it('should delete an owner', async () => {
+    const repository = new InMemoryOwnerRepository();
+    const owner = OwnerMother.random();
+    await repository.save(owner);
+
+    await repository.delete(owner.id);
+
+    const found = await repository.findById(owner.id);
+    expect(found).toBeNull();
+  });
 });
