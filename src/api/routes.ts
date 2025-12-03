@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { StatusRoutes } from './status/statusRoutes';
 import { UserRoutes } from './users/userRoutes';
+import { OwnerRoutes } from './owners/ownerRoutes';
 
 export class AppRoutes {
 
@@ -10,6 +11,7 @@ export class AppRoutes {
 
     router.use('/api/status', StatusRoutes.routes);
     router.use('/api/users', UserRoutes.routes);
+    router.use('/api/owners', OwnerRoutes.routes);
 
     return router;
 

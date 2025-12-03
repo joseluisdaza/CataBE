@@ -15,3 +15,15 @@ services:
   Controllers.users.UserPostAuthController:
     class: ../../../users/userPostAuthController
     arguments: ['@Users.application.UserAuthenticator', '@Users.domain.UserTokenSigner']
+
+  Controllers.owners.OwnerPutController:
+    class: ../../../owners/ownerPutController
+    arguments: ['@Owners.application.OwnerRegistrar']
+
+  Controllers.owners.OwnerGetController:
+    class: ../../../owners/ownerGetController
+    arguments: ['@Owners.application.OwnerFinder']
+
+  Controllers.owners.OwnerGetAllController:
+    class: ../../../owners/ownerGetAllController
+    arguments: ['@Owners.application.OwnersFinder']

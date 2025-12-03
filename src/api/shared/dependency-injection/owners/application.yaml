@@ -1,0 +1,17 @@
+services:
+
+  Owners.domain.OwnerRepository:
+    class: ../../../../modules/owners/infrastructure/persistence/typeOrmOwnerRepository
+    arguments: ['@Shared.ConnectionManager']
+
+  Owners.application.OwnerRegistrar:
+    class: ../../../../modules/owners/application/ownerRegistrar
+    arguments: ['@Owners.domain.OwnerRepository']
+
+  Owners.application.OwnerFinder:
+    class: ../../../../modules/owners/application/ownerFinder
+    arguments: ['@Owners.domain.OwnerRepository']
+
+  Owners.application.OwnersFinder:
+    class: ../../../../modules/owners/application/ownersFinder
+    arguments: ['@Owners.domain.OwnerRepository']

@@ -58,6 +58,26 @@ Then('the response should contain field {string}', (key: string) => {
   assert.ok(_response.body && Object.prototype.hasOwnProperty.call(_response.body, key), `Expected response to contain field ${key}`);
 });
 
+Then('the response should be an empty array', () => {
+  assert.ok(Array.isArray(_response.body), 'Expected response body to be an array');
+  assert.strictEqual(_response.body.length, 0, 'Expected array length to be 0');
+});
+
+Then('the response should be an array with length {int}', (length: number) => {
+  assert.ok(Array.isArray(_response.body), 'Expected response body to be an array');
+  assert.strictEqual(_response.body.length, length, `Expected array length to be ${length} but got ${_response.body.length}`);
+});
+
+Then('the response should contain an item with:', (body: string) => {
+  const expected = JSON.parse(body);
+  const actual = _response.body;
+  assert.ok(Array.isArray(actual), 'Expected response body to be an array');
+  const found = actual.some((item: any) => {
+    return Object.keys(expected).every(key => item[key] === expected[key]);
+  });
+  assert.ok(found, 'Expected array to contain an item matching the provided fields');
+});
+
 Then('I store field {string} as variable {string}', (field: string, varName: string) => {
   const value = _response.body?.[field];
   assert.ok(value !== undefined, `Expected field ${field} to exist in response`);

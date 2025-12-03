@@ -2,3 +2,4 @@ imports:
   - { resource: ./controllers/application.yaml }
   - { resource: ./shared/application.yaml }
   - { resource: ./users/application.yaml }
+  - { resource: ./owners/application.yaml }
