@@ -3,6 +3,7 @@ import OwnerPutController from './ownerPutController';
 import OwnerGetController from './ownerGetController';
 import OwnerDeleteController from './ownerDeleteController';
 import OwnerPropertiesGetController from './ownerPropertiesGetController';
+import OwnerReportPostController from './ownerReportPostController';
 import { validateReqSchema } from '../shared/validator';
 import { getContainer } from '../shared/dependency-injection/container';
 import { authenticate, requireAdmin } from '../shared/auth';
@@ -19,6 +20,7 @@ export class OwnerRoutes {
     const ownerGetAllController = container.get<any>('Controllers.owners.OwnerGetAllController');
     const ownerDeleteController = container.get<OwnerDeleteController>('Controllers.owners.OwnerDeleteController');
     const ownerPropertiesGetController = container.get<OwnerPropertiesGetController>('Controllers.owners.OwnerPropertiesGetController');
+    const ownerReportPostController = container.get<OwnerReportPostController>('Controllers.owners.OwnerReportPostController');
 
     router.put('/:id', authenticate, requireAdmin, ownerPutController.reqSchema, validateReqSchema, (req: Request, res: Response, next: NextFunction) => {
       ownerPutController.run(req, res, next);
@@ -34,6 +36,10 @@ export class OwnerRoutes {
 
     router.get('/:id/properties', (req: Request, res: Response, next: NextFunction) => {
       ownerPropertiesGetController.run(req, res, next);
+    });
+
+    router.post('/:id/report', authenticate, (req: Request, res: Response, next: NextFunction) => {
+      ownerReportPostController.run(req, res, next);
     });
 
     router.delete('/:id', authenticate, requireAdmin, (req: Request, res: Response, next: NextFunction) => {

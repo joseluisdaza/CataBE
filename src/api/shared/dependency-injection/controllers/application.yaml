@@ -32,6 +32,10 @@ services:
     class: ../../../owners/ownerDeleteController
     arguments: ['@Owners.application.OwnerDeleter']
 
+  Controllers.owners.OwnerReportPostController:
+    class: ../../../owners/ownerReportPostController
+    arguments: ['@Owners.application.OwnerFinder', '@PropertiesOwners.application.OwnerPropertiesFinder']
+
   Controllers.properties.PropertyPutController:
     class: ../../../properties/propertyPutController
     arguments: ['@Properties.application.PropertyUpdater', '@Properties.application.PropertyCreator', '@Properties.application.PropertyFinder']
