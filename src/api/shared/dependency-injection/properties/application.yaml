@@ -23,3 +23,23 @@ services:
   Properties.application.PropertyCreator:
     class: ../../../../modules/properties/application/propertyCreator
     arguments: ['@Properties.domain.PropertyRepository']
+
+  PropertiesOwners.domain.PropertyOwnerLinkRepository:
+    class: ../../../../modules/propertiesOwners/infrastructure/persistence/typeOrmPropertyOwnerLinkRepository
+    arguments: ['@Shared.ConnectionManager']
+
+  PropertiesOwners.application.PropertyOwnersAdder:
+    class: ../../../../modules/propertiesOwners/application/propertyOwnersAdder
+    arguments: ['@PropertiesOwners.domain.PropertyOwnerLinkRepository']
+
+  PropertiesOwners.application.PropertyOwnersRemover:
+    class: ../../../../modules/propertiesOwners/application/propertyOwnersRemover
+    arguments: ['@PropertiesOwners.domain.PropertyOwnerLinkRepository']
+
+  PropertiesOwners.application.PropertyOwnersFinder:
+    class: ../../../../modules/propertiesOwners/application/propertyOwnersFinder
+    arguments: ['@PropertiesOwners.domain.PropertyOwnerLinkRepository', '@Owners.domain.OwnerRepository']
+
+  PropertiesOwners.application.OwnerPropertiesFinder:
+    class: ../../../../modules/propertiesOwners/application/ownerPropertiesFinder
+    arguments: ['@PropertiesOwners.domain.PropertyOwnerLinkRepository', '@Properties.domain.PropertyRepository']

@@ -48,3 +48,19 @@ services:
     class: ../../../properties/propertyDeleteController
     arguments: ['@Properties.application.PropertyDeleter']
 
+  Controllers.properties.PropertyOwnersGetController:
+    class: ../../../properties/propertyOwnersGetController
+    arguments: ['@PropertiesOwners.application.PropertyOwnersFinder']
+
+  Controllers.properties.PropertyOwnersPostController:
+    class: ../../../properties/propertyOwnersPostController
+    arguments: ['@PropertiesOwners.application.PropertyOwnersAdder']
+
+  Controllers.properties.PropertyOwnersDeleteController:
+    class: ../../../properties/propertyOwnersDeleteController
+    arguments: ['@PropertiesOwners.application.PropertyOwnersRemover']
+
+  Controllers.owners.OwnerPropertiesGetController:
+    class: ../../../owners/ownerPropertiesGetController
+    arguments: ['@PropertiesOwners.application.OwnerPropertiesFinder']
+
