@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { StatusRoutes } from './status/statusRoutes';
 import { UserRoutes } from './users/userRoutes';
 import { OwnerRoutes } from './owners/ownerRoutes';
+import { PropertyRoutes } from './properties/propertyRoutes';
 
 export class AppRoutes {
 
@@ -12,6 +13,7 @@ export class AppRoutes {
     router.use('/api/status', StatusRoutes.routes);
     router.use('/api/users', UserRoutes.routes);
     router.use('/api/owners', OwnerRoutes.routes);
+    router.use('/api/properties', PropertyRoutes.routes);
 
     return router;
 

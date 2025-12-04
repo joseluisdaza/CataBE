@@ -31,3 +31,20 @@ services:
   Controllers.owners.OwnerDeleteController:
     class: ../../../owners/ownerDeleteController
     arguments: ['@Owners.application.OwnerDeleter']
+
+  Controllers.properties.PropertyPutController:
+    class: ../../../properties/propertyPutController
+    arguments: ['@Properties.application.PropertyUpdater', '@Properties.application.PropertyCreator', '@Properties.application.PropertyFinder']
+
+  Controllers.properties.PropertyGetController:
+    class: ../../../properties/propertyGetController
+    arguments: ['@Properties.application.PropertyFinder']
+
+  Controllers.properties.PropertiesGetAllController:
+    class: ../../../properties/propertiesGetAllController
+    arguments: ['@Properties.application.PropertiesFinder']
+
+  Controllers.properties.PropertyDeleteController:
+    class: ../../../properties/propertyDeleteController
+    arguments: ['@Properties.application.PropertyDeleter']
+

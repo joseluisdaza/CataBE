@@ -1,0 +1,25 @@
+services:
+
+  Properties.domain.PropertyRepository:
+    class: ../../../../modules/properties/infrastructure/persistence/typeOrmPropertyRepository
+    arguments: ['@Shared.ConnectionManager']
+
+  Properties.application.PropertyUpdater:
+    class: ../../../../modules/properties/application/propertyUpdater
+    arguments: ['@Properties.domain.PropertyRepository']
+
+  Properties.application.PropertyFinder:
+    class: ../../../../modules/properties/application/propertyFinder
+    arguments: ['@Properties.domain.PropertyRepository']
+
+  Properties.application.PropertiesFinder:
+    class: ../../../../modules/properties/application/propertiesFinder
+    arguments: ['@Properties.domain.PropertyRepository']
+
+  Properties.application.PropertyDeleter:
+    class: ../../../../modules/properties/application/propertyDeleter
+    arguments: ['@Properties.domain.PropertyRepository']
+
+  Properties.application.PropertyCreator:
+    class: ../../../../modules/properties/application/propertyCreator
+    arguments: ['@Properties.domain.PropertyRepository']
